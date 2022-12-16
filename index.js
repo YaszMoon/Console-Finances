@@ -119,9 +119,59 @@ for (var i = 0; i < totalMonths; i++) {
 // The greatest increase in profits (date and amount) over the entire period.
 // The greatest decrease in losses (date and amount) over the entire period.
 // var arrays for profit, loss and diff, iterate through differences, if diff > 0 add month and diff to profits, if diff<0 add month and diff to losses
-// vars for increase and decrease set at ['month', 0]
+var profits = []
+var losses = []
+var diffHolder
+for (var i = 0; i < totalMonths; i++) {
+    if (i === totalMonths - 1) {
+      break;
+    } else {
+      // Calculate difference
+      diffHolder = finances[i + 1][1] - finances[i][1];
+
+    // Add diff to respective arrays
+    if (diffHolder > 0) {
+        profits.push([finances[i+1][0], diffHolder]);
+    } else {
+        losses.push([finances[i+1][0], diffHolder])
+    }
+    }
+  }
+
+//   console.log(profits)
+//   console.log(losses)
+
+
+// vars for increase and decrease
 // loop through profit, if amnt greater than increase, change value of increase
+var increaseMonth
+var increaseAmount = 0
+
+for (var i=0; i<profits.length; i++) {
+    if (profits[i][1] > increaseAmount) {
+        increaseMonth = profits[i][0];
+        increaseAmount = profits[i][1];
+    } else {
+        continue
+    }
+}
+
+// console.log(increaseMonth, increaseAmount)
+
 // loop through loss, if amnt less than loss, change value of loss
+var decreaseMonth
+var decreaseAmount = 0
+
+for (var i=0; i<losses.length; i++) {
+    if (losses[i][1] < decreaseAmount) {
+        decreaseMonth = losses[i][0];
+        decreaseAmount = losses[i][1];
+    } else {
+        continue
+    }
+}
+
+// console.log(decreaseMonth, decreaseAmount)
 
 // End result
 console.log(`
@@ -130,6 +180,6 @@ Financial Analysis\n
 Total Months: ${totalMonths}\n
 Total: $${profitLoss.toFixed(2)}\n
 Average  Change: $${averageChange.toFixed(2)}\n
-Greatest Increase in Profits: Feb-2012 ($1926159)\n
-Greatest Decrease in Profits: Sep-2013 ($-2196167)\n
+Greatest Increase in Profits: ${increaseMonth} ($${increaseAmount.toFixed(2)})\n
+Greatest Decrease in Profits: ${decreaseMonth} ($${decreaseAmount.toFixed(2)})\n
 `);
