@@ -89,7 +89,7 @@ var finances = [
 ];
 
 // The total number of months included in the dataset.
-var monthsTotal = finances.length;
+var totalMonths = finances.length;
 
 // The net total amount of Profit/Losses over the entire period.
 
@@ -97,13 +97,29 @@ var profitLoss = 0;
 
 //  total profit and loss, amnt to be added, var to iterate through (2), total months
 
-for (var i=0; i<monthsTotal; i++) {
+for (var i=0; i<totalMonths; i++) {
 
         profitLoss += finances[i][1]
         
 }
 
 // The average of the changes in Profit/Losses over the entire period.
+// for loop, get change between two periods, add change to var, divide total by totalMonths
+
+var totalChange = 0
+var averageChange
+for (var i=0; i<totalMonths; i++) {
+    if (i === totalMonths-1) {
+        break
+    } else {
+    totalChange += finances[i+1][1] - finances[i][1]
+    }
+
+    averageChange = totalChange/totalMonths
+
+}
+
+
 
 // You will need to track what the total change in profits is from month to month and then find the average.
 
@@ -119,9 +135,9 @@ for (var i=0; i<monthsTotal; i++) {
 console.log(`
 Financial Analysis\n
 ----------------------------\n
-Total Months: ${monthsTotal}\n
-Total: $${profitLoss}\n
-Average  Change: $-2315.12\n
+Total Months: ${totalMonths}\n
+Total: $${profitLoss.toFixed(2)}\n
+Average  Change: $${averageChange.toFixed(2)}\n
 Greatest Increase in Profits: Feb-2012 ($1926159)\n
 Greatest Decrease in Profits: Sep-2013 ($-2196167)\n
 `)
