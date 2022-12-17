@@ -113,7 +113,7 @@ for (var i = 0; i < totalMonths; i++) {
     totalChange += finances[i + 1][1] - finances[i][1];
   }
   // Find average
-  averageChange = totalChange / totalMonths;
+  averageChange = totalChange / totalMonths-1;
 }
 
 // The greatest increase in profits (date and amount) over the entire period.
@@ -179,7 +179,7 @@ Financial Analysis\n
 ----------------------------\n
 Total Months: ${totalMonths}\n
 Total: $${profitLoss.toFixed(2)}\n
-Average  Change: $${averageChange.toFixed(2)}\n
+Average Change: $${averageChange.toFixed(2)}\n
 Greatest Increase in Profits: ${increaseMonth} ($${increaseAmount.toFixed(2)})\n
 Greatest Decrease in Profits: ${decreaseMonth} ($${decreaseAmount.toFixed(2)})\n
 `);
